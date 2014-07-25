@@ -52,9 +52,14 @@ public class SocketCommunicationWrapperImpl implements SocketCommunicationWrappe
 
             outputStream.write(b);
 
-            logger.log(Level.INFO, "Number of bytes written: " + outputStream.size());
             outputStream.flush();
             outputStream.close();
+            logger.log(Level.INFO, "Number of bytes written: " + outputStream.size());
+
+            int count = 0;
+            while (count < 100000) {
+                count++;
+            }
 
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Could not open a serverSocket on port: " + port);
