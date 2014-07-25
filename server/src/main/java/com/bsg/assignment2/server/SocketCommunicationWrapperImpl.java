@@ -1,7 +1,9 @@
 package com.bsg.assignment2.server;
 
-import java.io.*;
-import java.net.*;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,15 +37,24 @@ public class SocketCommunicationWrapperImpl implements SocketCommunicationWrappe
         Socket client;
         try {
             serverSocket = new ServerSocket(port.intValue());
+            serverFileReader = new ServerFileReaderImpl();
+            serverFileReader.readyFile("/Users/rmistry/test.data");
+            byte b[] = serverFileReader.getMoreData();
+            logger.log(Level.INFO, "Byte array length " + b.length);
+
+            logger.log(Level.INFO, "Server socket address: " + serverSocket.getInetAddress());
             //serverSocket.setSoTimeout(getTimeout());
             client = serverSocket.accept();
 
-            BufferedOutputStream output = new BufferedOutputStream(client.getOutputStream());
-            serverFileReader = new ServerFileReaderImpl();
-            serverFileReader.readyFile("/Users/rmistry/test.data");
-            byte b[]= serverFileReader.getMoreData();
-            logger.log(Level.INFO, "Byte array " + b);
-            output.write(b);
+//            BufferedOutputStream output = new BufferedOutputStream(client.getOutputStream());
+            DataOutputStream outputStream = new DataOutputStream(client.getOutputStream());
+
+
+            outputStream.write(b);
+
+            logger.log(Level.INFO, "Number of bytes written: " + outputStream.size());
+            outputStream.flush();
+            outputStream.close();
 
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Could not open a serverSocket on port: " + port);
