@@ -1,18 +1,18 @@
 package com.bsg.assignment2.client;
 
 import com.bsg.assignment2.common.CommunicationWrapper;
-import com.bsg.assignment2.common.SocketCommunicationWrapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  * Created by rmistry on 2014/07/25.
  */
 public class ClientImpl implements Client {
-    private Logger logger = Logger.getLogger(ClientImpl.class.getName());
+    private static Logger logger = Logger.getLogger(ClientImpl.class.getName());
     private CommunicationWrapper communicationWrapper;
 
     public static void main(String args[]) {
@@ -42,7 +42,7 @@ public class ClientImpl implements Client {
             clientLocal.setqClientToServer(qClientToServer);
             clientLocal.setqServerToClient(qServerToClient);
 
-            clientLocal.setFilename("/Users/rmistry/test.data");
+            //clientLocal.setFilename("/Users/rmistry/test.data");
 
             String serverLocalBeanId = "serverLocal";
             LocalCommunicationWrapper serverLocal = (ServerLocalCommunicationWrapperImpl) context.getBean(serverLocalBeanId);
@@ -54,7 +54,22 @@ public class ClientImpl implements Client {
             new Thread(serverLocal).start();
         } else {
             clientBeanId = "clientSocket";
-            SocketCommunicationWrapper clientSocket = (ClientSocketCommunicationWrapperImpl) context.getBean(clientBeanId);
+            ClientSocketCommunicationWrapper clientSocket = (ClientSocketCommunicationWrapperImpl) context.getBean(clientBeanId);
+
+            String[] endPoint = parm.split(":");
+            if (endPoint.length != 2) {
+                logger.log(Level.SEVERE, "Invalid hostname and port supplied: " + parm);
+                System.exit(0);
+            } else {
+                String hostname = endPoint[0];
+                String port = endPoint[1];
+
+                clientSocket.setHostname(hostname);
+                clientSocket.setPort(new Integer(port));
+
+                //clientSocket.setFilename("/Users/rmistry/test.data");
+                clientSocket.initiateSocket();
+            }
         }
     }
 
