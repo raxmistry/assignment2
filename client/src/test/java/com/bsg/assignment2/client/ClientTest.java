@@ -1,8 +1,10 @@
 package com.bsg.assignment2.client;
 
+import com.bsg.assignment2.common.SocketProtocol;
 import org.junit.Test;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
@@ -18,6 +20,7 @@ public class ClientTest {
 
     public static final int BUFFER_LENGTH = 23;
     Logger logger = Logger.getLogger(ClientTest.class.getName());
+
     @Test
     public void testClientConnects() {
         Socket socket = new Socket();
@@ -32,6 +35,12 @@ public class ClientTest {
             InputStream is = socket.getInputStream();
 
             DataInputStream inputStream = new DataInputStream(is);
+            DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
+
+
+            outputStream.writeBytes(SocketProtocol.CLIENT_INITIAL_READY);
+            outputStream.flush();
+
             byte[] b = new byte[BUFFER_LENGTH];
 
             int read = inputStream.read(b);
@@ -42,7 +51,12 @@ public class ClientTest {
 
             logger.log(Level.INFO, "Finish read");
 
+
+            outputStream.writeBytes("/Users/rmistry/test.data");
+            outputStream.flush();
+
             inputStream.close();
+            outputStream.close();
 
 
         } catch (IOException e) {

@@ -1,6 +1,7 @@
 package com.bsg.assignment2.server;
 
 import com.bsg.assignment2.common.FileReader;
+import com.bsg.assignment2.common.FileReaderImpl;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,9 +15,9 @@ public class FileReaderImplTest {
 
         FileReader fileReader = new FileReaderImpl();
         fileReader.readyFile(FILENAME);
-        byte[] data = fileReader.getMoreData();
+        String data = fileReader.getMoreData();
 
         Assert.assertNotNull(data);
-        Assert.assertEquals(FILE_LENGTH, data.length);
+        Assert.assertEquals(FILE_LENGTH, data.length());
     }
 }

@@ -48,16 +48,24 @@ public class ClientSocketCommunicationWrapperImpl implements ClientSocketCommuni
 
                 sendToOutputStream(outputStream, SocketProtocol.CLIENT_INITIAL_READY);
 
-                inputBytes = getBytes(inputStream);
+                inputBytes = getBytes(inputStream, SocketProtocol.SERVER_INITIAL_OK.length());
                 String serverInitialOk = new String(inputBytes);
                 if (serverInitialOk.compareTo(SocketProtocol.SERVER_INITIAL_OK) == 0) {
                     //Send the filename we want to stream back
                     sendToOutputStream(outputStream, "/Users/rmistry/test.data");
                 }
 
+                inputBytes = getBytes(inputStream, SocketProtocol.SERVER_FILENAME_OK.length());
+                String serverFilenameOk = new String(inputBytes);
+
+                if (serverFilenameOk.compareTo(SocketProtocol.SERVER_FILENAME_OK) == 0) {
+                    sendToOutputStream(outputStream, SocketProtocol.CLIENT_READY_FOR_DATA);
+                }
+
                 // Get the data from the filename
-                inputBytes = getBytes(inputStream);
-                System.out.println(new String(inputBytes));
+                String data = inputStream.readUTF();
+                System.out.println(data);
+
 
                 // Let the server know that we're done
                 sendToOutputStream(outputStream, SocketProtocol.CLIENT_DONE);
@@ -96,24 +104,21 @@ public class ClientSocketCommunicationWrapperImpl implements ClientSocketCommuni
     }
 
     private void sendToOutputStream(DataOutputStream outputStream, String data) throws IOException {
-        outputStream.writeBytes(data);
+        outputStream.writeUTF(data);
         outputStream.flush();
     }
 
 
     // Read available data from the input stream
-    private byte[] getBytes(DataInputStream inputStream) throws IOException {
-        int read;
-        int available;
-        byte[] inputBytes;
-        read = 0;
-        available = inputStream.available();
-        inputBytes = new byte[available];
+    private byte[] getBytes(DataInputStream inputStream, int tagLength) throws IOException {
+//        while (inputStream.available()==0){
+//            logger.log(Level.FINEST, "Waiting for data to be available");
+//        }
+        logger.log(Level.INFO, "Some data is le");
+        String readUTF = inputStream.readUTF();
+        logger.log(Level.INFO, "UTF " + readUTF);
 
-        while (available > 0) {
-            read = inputStream.read(inputBytes);
-        }
-        return inputBytes;
+        return readUTF.getBytes();
     }
 
     @Override

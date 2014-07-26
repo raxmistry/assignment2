@@ -1,20 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="74000eef-17b4-40ff-acd2-67cd423de118" name="Default" comment="Implemented socket protocol and server side logic">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_dep_4_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_library_1_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jmock_jmock_2_6_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_jmock_jmock_junit4_2_6_0.xml" />
+    <list default="true" id="74000eef-17b4-40ff-acd2-67cd423de118" name="Default" comment="Arrrgh why doesn't it work">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/FileReaderImpl.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/FileReaderImpl.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/main/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImpl.java" afterPath="$PROJECT_DIR$/client/src/main/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImplTest.java" afterPath="$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImplTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientTest.java" afterPath="$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/FileReader.java" afterPath="$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/FileReader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/test/java/com/bsg/assignment2/server/FileReaderImplTest.java" afterPath="$PROJECT_DIR$/server/src/test/java/com/bsg/assignment2/server/FileReaderImplTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/ServerSocketCommunicationWrapperImpl.java" afterPath="$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/ServerSocketCommunicationWrapperImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assignment2.iml" afterPath="$PROJECT_DIR$/assignment2.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/client.iml" afterPath="$PROJECT_DIR$/client/client.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/common.iml" afterPath="$PROJECT_DIR$/common/common.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/server.iml" afterPath="$PROJECT_DIR$/server/server.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="assign2.iws" />
@@ -38,34 +33,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ServerSocketCommunicationWrapperImpl.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ServerSocketCommunicationWrapperImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/ServerSocketCommunicationWrapperImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.31669867" vertical-offset="0" max-vertical-offset="2535">
-              <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="2295">
+              <caret line="111" column="37" selection-start-line="111" selection-start-column="37" selection-end-line="111" selection-end-column="37" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClientSocketCommunicationWrapperImplTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImplTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
-              <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClientTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="1005">
-              <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -74,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/server/src/test/java/com/bsg/assignment2/server/ServerSocketCommunicationWrapperImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
-              <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+              <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -82,15 +55,57 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="ClientSocketCommunicationWrapperImplTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
+              <caret line="13" column="58" selection-start-line="13" selection-start-column="58" selection-end-line="13" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileReader.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/FileReader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
+              <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileReaderImpl.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/FileReaderImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.57581574" vertical-offset="0" max-vertical-offset="525">
+              <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileReaderImplTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/src/test/java/com/bsg/assignment2/server/FileReaderImplTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="ClientSocketCommunicationWrapperImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/src/main/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="544" max-vertical-offset="2235">
-              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1474" max-vertical-offset="2295">
+              <caret line="116" column="10" selection-start-line="116" selection-start-column="10" selection-end-line="116" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4098#4099#0" expanded="true" />
-                <element signature="e#4138#4139#0" expanded="true" />
+                <element signature="e#4519#4520#0" expanded="true" />
+                <element signature="e#4559#4560#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,13 +135,11 @@
         <option value="$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/SocketCommunicationWrapper.java" />
         <option value="$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/CommunicationWrapper.java" />
         <option value="$PROJECT_DIR$/server/src/test/java/com/bsg/assignment2/server/SocketCommunicationWrapperImplTest.java" />
-        <option value="$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientTest.java" />
         <option value="$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/ServerImpl.java" />
         <option value="$PROJECT_DIR$/client/src/main/java/com/bsg/assignment2/client/Client.java" />
         <option value="$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/SocketCommunicationWrapperImpl.java" />
         <option value="$PROJECT_DIR$/server/pom.xml" />
         <option value="$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/ServerFileReader.java" />
-        <option value="$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/FileReader.java" />
         <option value="$PROJECT_DIR$/client/src/main/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapper.java" />
         <option value="$PROJECT_DIR$/client/src/main/java/com/bsg/assignment2/client/ClientSocketWrapperImpl.java" />
         <option value="$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/CommunicationWrapper.java" />
@@ -134,11 +147,15 @@
         <option value="$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/SocketCommunicationWrapper.java" />
         <option value="$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientImplTest.java" />
         <option value="$PROJECT_DIR$/client/src/main/java/com/bsg/assignment2/client/ClientImpl.java" />
-        <option value="$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/SocketProtocol.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImplTest.java" />
+        <option value="$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientTest.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/SocketProtocol.java" />
+        <option value="$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/FileReader.java" />
+        <option value="$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/FileReaderImpl.java" />
+        <option value="$PROJECT_DIR$/server/src/test/java/com/bsg/assignment2/server/FileReaderImplTest.java" />
         <option value="$PROJECT_DIR$/client/src/main/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImpl.java" />
         <option value="$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/ServerSocketCommunicationWrapperImpl.java" />
+        <option value="$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImplTest.java" />
       </list>
     </option>
   </component>
@@ -551,7 +568,7 @@
     <property name="options.searchVisible" value="true" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
-    <property name="SearchEverywhereHistoryKey" value="serversock&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/common/src/main/java/com/bsg/assignment2/common/ServerSocketCommunicationWrapper.java&#10;ser&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/server/src/main/java/com/bsg/assignment2/server/ServerSocketCommunicationWrapperImpl.java&#10;client&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/client/src/main/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImpl.java&#10;serverso&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/server/src/main/java/com/bsg/assignment2/server/ServerSocketCommunicationWrapperImpl.java&#10;serverim&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/server/src/main/java/com/bsg/assignment2/server/ServerImpl.java&#10;&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/server/src/main/java/com/bsg/assignment2/server/CommunicationWrapper.java&#10;se&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/server/src/main/java/com/bsg/assignment2/server/ServerImpl.java&#10;server&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/server/src/main/java/com/bsg/assignment2/server/Server.java" />
+    <property name="SearchEverywhereHistoryKey" value="filereadim&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/server/src/test/java/com/bsg/assignment2/server/FileReaderImplTest.java&#10;sock&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/common/src/main/java/com/bsg/assignment2/common/SocketProtocol.java&#10;serversock&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/common/src/main/java/com/bsg/assignment2/common/ServerSocketCommunicationWrapper.java&#10;ser&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/server/src/main/java/com/bsg/assignment2/server/ServerSocketCommunicationWrapperImpl.java&#10;client&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/client/src/main/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImpl.java&#10;serverso&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/server/src/main/java/com/bsg/assignment2/server/ServerSocketCommunicationWrapperImpl.java&#10;serverim&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/server/src/main/java/com/bsg/assignment2/server/ServerImpl.java&#10;&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/server/src/main/java/com/bsg/assignment2/server/CommunicationWrapper.java&#10;se&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/server/src/main/java/com/bsg/assignment2/server/ServerImpl.java&#10;server&#9;FILE&#9;file:///Users/rmistry/Documents/Development/workspace/assignment2/server/src/main/java/com/bsg/assignment2/server/Server.java" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="recentsLimit" value="5" />
@@ -559,7 +576,7 @@
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
@@ -581,7 +598,7 @@
       <recent name="$PROJECT_DIR$/client/src/main/java" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ClientSocketCommunicationWrapperImplTest">
+  <component name="RunManager" selected="JUnit.ClientSocketCommunicationWrapperImplTest.testInitiateSocket">
     <configuration default="false" name="ServerSocketCommunicationWrapperImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -607,50 +624,6 @@
       </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="ClientTest.testClientConnects" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="client" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.bsg.assignment2.client" />
-      <option name="MAIN_CLASS_NAME" value="com.bsg.assignment2.client.ClientTest" />
-      <option name="METHOD_NAME" value="testClientConnects" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="ClientImplTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="client" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="com.bsg.assignment2.client" />
-      <option name="MAIN_CLASS_NAME" value="com.bsg.assignment2.client.ClientImplTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -684,6 +657,56 @@
       <option name="MAIN_CLASS_NAME" value="com.bsg.assignment2.client.ClientSocketCommunicationWrapperImplTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ServerSocketCommunicationWrapperImplTest.testSocketListener" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.bsg.assignment2.server" />
+      <option name="MAIN_CLASS_NAME" value="com.bsg.assignment2.server.ServerSocketCommunicationWrapperImplTest" />
+      <option name="METHOD_NAME" value="testSocketListener" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ClientSocketCommunicationWrapperImplTest.testInitiateSocket" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="client" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="com.bsg.assignment2.client" />
+      <option name="MAIN_CLASS_NAME" value="com.bsg.assignment2.client.ClientSocketCommunicationWrapperImplTest" />
+      <option name="METHOD_NAME" value="testInitiateSocket" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -829,18 +852,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="JUnit.ServerSocketCommunicationWrapperImplTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.ClientTest.testClientConnects" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.ClientImplTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.FileReaderImplTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.ClientSocketCommunicationWrapperImplTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.FileReaderImplTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.ClientSocketCommunicationWrapperImplTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.ServerSocketCommunicationWrapperImplTest.testSocketListener" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ClientSocketCommunicationWrapperImplTest.testInitiateSocket" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.ClientSocketCommunicationWrapperImplTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ServerSocketCommunicationWrapperImplTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ClientTest.testClientConnects" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.FileReaderImplTest" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.ClientImplTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.ClientSocketCommunicationWrapperImplTest.testInitiateSocket" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ServerSocketCommunicationWrapperImplTest.testSocketListener" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.FileReaderImplTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ClientSocketCommunicationWrapperImplTest" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.ServerSocketCommunicationWrapperImplTest" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -879,7 +902,11 @@
       <created>1406366942636</created>
       <updated>1406366942636</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Arrrgh why doesn't it work">
+      <created>1406370226603</created>
+      <updated>1406370226603</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -923,7 +950,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30277777" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32942554" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -949,14 +976,15 @@
     <MESSAGE value="In progress" />
     <MESSAGE value="Starting client code" />
     <MESSAGE value="Implemented socket protocol and server side logic" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented socket protocol and server side logic" />
+    <MESSAGE value="Arrrgh why doesn't it work" />
+    <option name="LAST_COMMIT_MESSAGE" value="Arrrgh why doesn't it work" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="6" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -976,14 +1004,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.10909091" vertical-offset="0" max-vertical-offset="825">
           <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="825">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1022,17 +1042,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/FileReaderImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="495">
-          <caret line="23" column="52" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#577#578#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/ServerImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="330">
@@ -1065,14 +1074,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/FileReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3033088" vertical-offset="0" max-vertical-offset="544">
-          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/main/java/com/bsg/assignment2/client/ClientImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3033088" vertical-offset="30" max-vertical-offset="585">
@@ -1091,26 +1092,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/SocketProtocol.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
-          <caret line="7" column="79" selection-start-line="7" selection-start-column="79" selection-end-line="7" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="270">
           <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/test/java/com/bsg/assignment2/server/FileReaderImplTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.54702497" vertical-offset="0" max-vertical-offset="521">
-          <caret line="21" column="1" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -1149,16 +1134,70 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/main/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="240">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.20153551" vertical-offset="0" max-vertical-offset="521">
+          <caret line="7" column="68" selection-start-line="7" selection-start-column="68" selection-end-line="7" selection-end-column="68" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImplTest.java">
+    <entry file="file://$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
-          <caret line="17" column="1" selection-start-line="17" selection-start-column="1" selection-end-line="17" selection-end-column="1" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1200">
+          <caret line="57" column="23" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/SocketProtocol.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="285">
+          <caret line="12" column="1" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/FileReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/test/java/com/bsg/assignment2/server/FileReaderImplTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/main/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1474" max-vertical-offset="2295">
+          <caret line="116" column="10" selection-start-line="116" selection-start-column="10" selection-end-line="116" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4519#4520#0" expanded="true" />
+            <element signature="e#4559#4560#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="825">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/ServerSocketCommunicationWrapperImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="390" max-vertical-offset="2295">
+          <caret line="111" column="37" selection-start-line="111" selection-start-column="37" selection-end-line="111" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -1166,40 +1205,28 @@
     <entry file="file://$PROJECT_DIR$/server/src/test/java/com/bsg/assignment2/server/ServerSocketCommunicationWrapperImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
-          <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
+          <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientTest.java">
+    <entry file="file://$PROJECT_DIR$/client/src/test/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="1005">
-          <caret line="33" column="44" selection-start-line="33" selection-start-column="44" selection-end-line="33" selection-end-column="44" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/main/java/com/bsg/assignment2/client/ClientSocketCommunicationWrapperImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="544" max-vertical-offset="2235">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4098#4099#0" expanded="true" />
-            <element signature="e#4138#4139#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server/src/main/java/com/bsg/assignment2/server/ServerSocketCommunicationWrapperImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.31669867" vertical-offset="0" max-vertical-offset="2535">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
+          <caret line="13" column="58" selection-start-line="13" selection-start-column="58" selection-end-line="13" selection-end-column="58" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/main/java/com/bsg/assignment2/common/FileReaderImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.57581574" vertical-offset="0" max-vertical-offset="525">
+          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1255,7 +1282,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>client</last-edited>
+          <last-edited>common</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

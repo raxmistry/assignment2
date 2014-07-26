@@ -1,11 +1,10 @@
-package com.bsg.assignment2.server;
-
-import com.bsg.assignment2.common.FileReader;
+package com.bsg.assignment2.common;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * Created by rmistry on 2014/07/25.
@@ -21,7 +20,8 @@ public class FileReaderImpl implements FileReader {
     }
 
     @Override
-    public byte[] getMoreData() throws IOException {
-        return Files.readAllBytes(path);
+    public String getMoreData() throws IOException {
+        List<String> stringList = Files.readAllLines(path);
+        return String.valueOf(stringList);
     }
 }

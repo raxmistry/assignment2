@@ -8,5 +8,7 @@ import java.io.IOException;
 public interface FileReader {
     void readyFile(String filename);
 
-    byte[] getMoreData() throws IOException;
+    String getMoreData() throws IOException;
+
+
 }
