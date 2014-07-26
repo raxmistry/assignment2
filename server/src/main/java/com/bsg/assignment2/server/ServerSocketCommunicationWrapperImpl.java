@@ -55,13 +55,26 @@ public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommuni
             inputStream = new DataInputStream(client.getInputStream());
 
 
+            if (client.isConnected()) {
+                logger.log(Level.INFO, "Client is connected");
+                logger.log(Level.INFO, "Client receive buffer size : " + client.getReceiveBufferSize());
+                logger.log(Level.INFO, "Client send buffer size : " + client.getSendBufferSize());
+            }
+
+//            logger.log(Level.FINE, "Waiting for client to send data");
+//            while (inputStream.available() == 0 ) {
+//
+//            }
+//            logger.log(Level.FINE, "Client has finally sent some data");
+
             // Check for InitialReady
             inputBytes = getBytes(inputStream);
             String initialReady = new String(inputBytes);
+            logger.log(Level.INFO, "intialReady = " + initialReady);
             if (initialReady.compareTo(SocketProtocol.CLIENT_INITIAL_READY) == 0) {
                 // Reply okInitial
-                outputStream.writeBytes(SocketProtocol.SERVER_INITIAL_OK);
-                outputStream.flush();
+                logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_INITIAL_READY);
+                sendToOutputStream(outputStream, SocketProtocol.SERVER_INITIAL_OK);
             }
 
             // Check for Filename
@@ -69,14 +82,15 @@ public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommuni
             String filename = new String(inputBytes);
             if (filename != null) {
                 // Reply okFilename
-                outputStream.writeBytes(SocketProtocol.SERVER_FILENAME_OK);
-                outputStream.flush();
+                logger.log(Level.INFO, "Send " + SocketProtocol.SERVER_FILENAME_OK);
+                sendToOutputStream(outputStream, SocketProtocol.SERVER_FILENAME_OK);
             }
 
             // Get ReadyForData state from client
             inputBytes = getBytes(inputStream);
             String clientReadyForData = new String(inputBytes);
             if (clientReadyForData.compareTo(SocketProtocol.CLIENT_READY_FOR_DATA) == 0) {
+                logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_READY_FOR_DATA);
                 // Reply with data
                 streamFile(outputStream, filename);
             }
@@ -86,11 +100,10 @@ public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommuni
             inputBytes = getBytes(inputStream);
             String clientDone = new String(inputBytes);
             if (clientDone.compareTo(SocketProtocol.CLIENT_DONE) == 0) {
+                logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_DONE);
                 // Close connection
                 closeSocket();
             }
-
-
 
 
         } catch (IOException e) {
@@ -118,6 +131,11 @@ public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommuni
         }
     }
 
+    private void sendToOutputStream(DataOutputStream outputStream, String data) throws IOException {
+        outputStream.writeBytes(data);
+        outputStream.flush();
+    }
+
     // Read available data from the input stream
     private byte[] getBytes(DataInputStream inputStream) throws IOException {
         int read;
@@ -130,6 +148,8 @@ public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommuni
         while (available > 0) {
             read = inputStream.read(inputBytes);
         }
+
+        logger.log(Level.INFO, "Number of bytes read from input stream: " + read);
         return inputBytes;
     }
 
