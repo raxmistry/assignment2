@@ -46,8 +46,7 @@ public class ClientSocketCommunicationWrapperImpl implements ClientSocketCommuni
                 inputStream = new DataInputStream(clientSocket.getInputStream());
                 outputStream = new DataOutputStream(clientSocket.getOutputStream());
 
-                //TODO: Get an input filename from somewhere
-                clientProtocol.setFilename("/Users/rmistry/test.data");
+                clientProtocol.setFilename(filename);
                 clientProtocol.startProtocol(inputStream, outputStream);
 
 
