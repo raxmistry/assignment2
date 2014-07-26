@@ -1,8 +1,7 @@
 package com.bsg.assignment2.client;
 
-import org.junit.Test;
-
-import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Logger;
 
 /**
@@ -11,46 +10,27 @@ import java.util.logging.Logger;
 public class LocalPipeTest {
     private Logger logger = Logger.getLogger(LocalPipeTest.class.getName());
 
-    @Test
-    public void testPipe() {
+//    @Test
+//    public void testPipe() {
 
-        SynchronousQueue<String> queue = new SynchronousQueue<String>();
+//        SynchronousQueue<String> qServerToClient = new SynchronousQueue<String>();
+//        SynchronousQueue<String> qClientToServer = new SynchronousQueue<String>();
+
+    public static void main(String args[]) {
+        BlockingQueue<String> qServerToClient = new LinkedBlockingQueue<String>();
+        BlockingQueue<String> qClientToServer = new LinkedBlockingQueue<String>();
 
         ServerLocalCommunicationWrapperImpl serverWrapper = new ServerLocalCommunicationWrapperImpl();
-        serverWrapper.setQueue(queue);
+        serverWrapper.setqServerToClient(qServerToClient);
+        serverWrapper.setqClientToServer(qClientToServer);
 
         ClientLocalCommunicationWrapperImpl clientWrapper = new ClientLocalCommunicationWrapperImpl();
-        clientWrapper.setQueue(queue);
+        clientWrapper.setqServerToClient(qServerToClient);
+        clientWrapper.setqClientToServer(qClientToServer);
+        clientWrapper.setFilename("/Users/rmistry/test.data");
 
         new Thread(serverWrapper).start();
         new Thread(clientWrapper).start();
-
-
-//        PipedInputStream clientInputStream = new PipedInputStream();
-//        PipedOutputStream clientOutputStream = new PipedOutputStream();
-//        PipedInputStream serverInputStream = new PipedInputStream();
-//        PipedOutputStream serverOutputStream = new PipedOutputStream();
-//
-//        // Connect the client Input Stream to the server OutputStream
-//        try {
-//            clientInputStream.connect(serverOutputStream);
-//            serverInputStream.connect(clientOutputStream);
-//        } catch (IOException e) {
-//            logger.log(Level.SEVERE, "Error connecting pipe between client and server.");
-//            e.printStackTrace();
-//            System.exit(0);
-//        }
-
-
-//        LocalCommunicationWrapper serverWrapper = new ServerLocalCommunicationWrapperImpl();
-//        serverWrapper.setInputStream(serverInputStream);
-//        serverWrapper.setOutputStream(serverOutputStream);
-//
-//
-//        LocalCommunicationWrapper clientWrapper = new ClientLocalCommunicationWrapperImpl();
-//        clientWrapper.setInputStream(clientInputStream);
-//        clientWrapper.setOutputStream(clientOutputStream);
-
 
     }
 }
