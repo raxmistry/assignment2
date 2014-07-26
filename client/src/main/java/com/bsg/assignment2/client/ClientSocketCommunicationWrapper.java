@@ -7,4 +7,6 @@ import com.bsg.assignment2.common.SocketCommunicationWrapper;
  */
 public interface ClientSocketCommunicationWrapper extends SocketCommunicationWrapper {
     public void setHostname(String hostname);
+
+    public void setFilename(String filename);
 }

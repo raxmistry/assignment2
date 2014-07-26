@@ -60,46 +60,7 @@ public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommuni
                 logger.log(Level.INFO, "Client is connected");
             }
 
-
-            // Check for InitialReady
-            inputBytes = getBytes(inputStream, SocketProtocol.CLIENT_INITIAL_READY.length());
-            String initialReady = new String(inputBytes);
-            logger.log(Level.INFO, "initialReady = " + initialReady);
-            if (initialReady.compareTo(SocketProtocol.CLIENT_INITIAL_READY) == 0) {
-                // Reply okInitial
-                logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_INITIAL_READY);
-                sendToOutputStream(outputStream, SocketProtocol.SERVER_INITIAL_OK);
-            }
-
-            // Check for Filename
-            inputBytes = getBytes(inputStream, -1);
-            String filename = new String(inputBytes);
-            logger.log(Level.INFO, "Filename = " + filename);
-            if (filename != null) {
-                // Reply okFilename
-                logger.log(Level.INFO, "Send " + SocketProtocol.SERVER_FILENAME_OK);
-                sendToOutputStream(outputStream, SocketProtocol.SERVER_FILENAME_OK);
-            }
-
-            // Get ReadyForData state from client
-            inputBytes = getBytes(inputStream, SocketProtocol.CLIENT_READY_FOR_DATA.length());
-            String clientReadyForData = new String(inputBytes);
-            if (clientReadyForData.compareTo(SocketProtocol.CLIENT_READY_FOR_DATA) == 0) {
-                logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_READY_FOR_DATA);
-                // Reply with data
-                streamFile(outputStream, filename);
-                //sendToOutputStream(outputStream, "Somefakedata");
-            }
-
-
-            // Get done state from client
-            inputBytes = getBytes(inputStream, SocketProtocol.CLIENT_DONE.length());
-            String clientDone = new String(inputBytes);
-            if (clientDone.compareTo(SocketProtocol.CLIENT_DONE) == 0) {
-                logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_DONE);
-                // Close connection
-                closeSocket();
-            }
+            serverProtocol(outputStream, inputStream);
 
 
         } catch (IOException e) {
@@ -127,13 +88,54 @@ public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommuni
         }
     }
 
+    private void serverProtocol(DataOutputStream outputStream, DataInputStream inputStream) throws IOException {
+        byte[] inputBytes;// Check for InitialReady
+        inputBytes = getBytes(inputStream);
+        String initialReady = new String(inputBytes);
+        logger.log(Level.INFO, "initialReady = " + initialReady);
+        if (initialReady.compareTo(SocketProtocol.CLIENT_INITIAL_READY) == 0) {
+            // Reply okInitial
+            logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_INITIAL_READY);
+            sendToOutputStream(outputStream, SocketProtocol.SERVER_INITIAL_OK);
+        }
+
+        // Check for Filename
+        inputBytes = getBytes(inputStream);
+        String filename = new String(inputBytes);
+        logger.log(Level.INFO, "Filename = " + filename);
+        if (filename != null) {
+            // Reply okFilename
+            logger.log(Level.INFO, "Send " + SocketProtocol.SERVER_FILENAME_OK);
+            sendToOutputStream(outputStream, SocketProtocol.SERVER_FILENAME_OK);
+        }
+
+        // Get ReadyForData state from client
+        inputBytes = getBytes(inputStream);
+        String clientReadyForData = new String(inputBytes);
+        if (clientReadyForData.compareTo(SocketProtocol.CLIENT_READY_FOR_DATA) == 0) {
+            logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_READY_FOR_DATA);
+            // Reply with data
+            streamFile(outputStream, filename);
+        }
+
+
+        // Get done state from client
+        inputBytes = getBytes(inputStream);
+        String clientDone = new String(inputBytes);
+        if (clientDone.compareTo(SocketProtocol.CLIENT_DONE) == 0) {
+            logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_DONE);
+            // Close connection
+            closeSocket();
+        }
+    }
+
     private void sendToOutputStream(DataOutputStream outputStream, String data) throws IOException {
         outputStream.writeUTF(data);
         outputStream.flush();
     }
 
     // Read available data from the input stream
-    private byte[] getBytes(DataInputStream inputStream, int tagLength) throws IOException {
+    private byte[] getBytes(DataInputStream inputStream) throws IOException {
         String readUTF = inputStream.readUTF();
         return readUTF.getBytes();
     }

@@ -19,6 +19,7 @@ public class FileReaderImpl implements FileReader {
         }
     }
 
+    //TODO: Change this os I can stream a binary file
     @Override
     public String getMoreData() throws IOException {
         List<String> stringList = Files.readAllLines(path);

@@ -1,7 +1,5 @@
-package com.bsg.assignment2.server;
+package com.bsg.assignment2.common;
 
-import com.bsg.assignment2.common.FileReader;
-import com.bsg.assignment2.common.FileReaderImpl;
 import org.junit.Assert;
 import org.junit.Test;
 

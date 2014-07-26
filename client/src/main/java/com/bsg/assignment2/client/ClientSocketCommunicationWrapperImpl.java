@@ -18,6 +18,7 @@ public class ClientSocketCommunicationWrapperImpl implements ClientSocketCommuni
     private Integer port;
     private String hostname;
     private Logger logger = Logger.getLogger(ClientSocketCommunicationWrapperImpl.class.getName());
+    private String filename;
 
     @Override
     public void setPort(Integer port) {
@@ -52,7 +53,7 @@ public class ClientSocketCommunicationWrapperImpl implements ClientSocketCommuni
                 String serverInitialOk = new String(inputBytes);
                 if (serverInitialOk.compareTo(SocketProtocol.SERVER_INITIAL_OK) == 0) {
                     //Send the filename we want to stream back
-                    sendToOutputStream(outputStream, "/Users/rmistry/test.data");
+                    sendToOutputStream(outputStream, filename);
                 }
 
                 inputBytes = getBytes(inputStream, SocketProtocol.SERVER_FILENAME_OK.length());
@@ -114,7 +115,7 @@ public class ClientSocketCommunicationWrapperImpl implements ClientSocketCommuni
 //        while (inputStream.available()==0){
 //            logger.log(Level.FINEST, "Waiting for data to be available");
 //        }
-        logger.log(Level.INFO, "Some data is le");
+
         String readUTF = inputStream.readUTF();
         logger.log(Level.INFO, "UTF " + readUTF);
 
@@ -134,6 +135,11 @@ public class ClientSocketCommunicationWrapperImpl implements ClientSocketCommuni
     @Override
     public void setHostname(String hostname) {
         this.hostname = hostname;
+    }
+
+    @Override
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     private InetSocketAddress createConnectionAddress() {
