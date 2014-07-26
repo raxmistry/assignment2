@@ -1,11 +1,11 @@
 package com.bsg.assignment2.client;
 
 import com.bsg.assignment2.common.CommunicationWrapper;
-import com.bsg.assignment2.common.LocalCommunicationWrapper;
 import com.bsg.assignment2.common.SocketCommunicationWrapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Logger;
 
 /**
@@ -31,8 +31,27 @@ public class ClientImpl implements Client {
                 "spring-beans.xml");
 
         if (parm.compareToIgnoreCase("local") == 0) {
+
+
+            LinkedBlockingQueue<String> qServerToClient = new LinkedBlockingQueue<String>();
+            LinkedBlockingQueue<String> qClientToServer = new LinkedBlockingQueue<String>();
+
             clientBeanId = "clientLocal";
             LocalCommunicationWrapper clientLocal = (ClientLocalCommunicationWrapperImpl) context.getBean(clientBeanId);
+
+            clientLocal.setqClientToServer(qClientToServer);
+            clientLocal.setqServerToClient(qServerToClient);
+
+            clientLocal.setFilename("/Users/rmistry/test.data");
+
+            String serverLocalBeanId = "serverLocal";
+            LocalCommunicationWrapper serverLocal = (ServerLocalCommunicationWrapperImpl) context.getBean(serverLocalBeanId);
+
+            serverLocal.setqClientToServer(qClientToServer);
+            serverLocal.setqServerToClient(qServerToClient);
+
+            new Thread(clientLocal).start();
+            new Thread(serverLocal).start();
         } else {
             clientBeanId = "clientSocket";
             SocketCommunicationWrapper clientSocket = (ClientSocketCommunicationWrapperImpl) context.getBean(clientBeanId);

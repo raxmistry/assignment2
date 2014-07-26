@@ -22,6 +22,7 @@ public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWr
     private PipedInputStream inputStream;
     private BlockingQueue<String> qServerToClient;
     private BlockingQueue<String> qClientToServer;
+    private String filename;
 
     public void queues(BlockingQueue<String> qServerToClient, BlockingQueue<String> qClientToServer) {
 
@@ -37,7 +38,7 @@ public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWr
         }
 
         head = pollQueue(qClientToServer, TIMEOUT, TimeUnit.MILLISECONDS);
-        String filename = head;
+        filename = head;
         logger.log(Level.INFO, head);
 
         offerToQueue(qServerToClient, SocketProtocol.SERVER_FILENAME_OK, TIMEOUT, TimeUnit.MILLISECONDS);
@@ -92,22 +93,17 @@ public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWr
         queues(qServerToClient, qClientToServer);
     }
 
-    @Override
-    public void setOutputStream(PipedOutputStream outputStream) {
-        this.outputStream = outputStream;
-    }
-
-    @Override
-    public void setInputStream(PipedInputStream inputStream) {
-        this.inputStream = inputStream;
-    }
-
     public void setqServerToClient(BlockingQueue<String> qServerToClient) {
         this.qServerToClient = qServerToClient;
     }
 
     public void setqClientToServer(BlockingQueue<String> qClientToServer) {
         this.qClientToServer = qClientToServer;
+    }
+
+    @Override
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     private String pollQueue(BlockingQueue<String> queueName, Long timeout, TimeUnit timeUnit) {

@@ -9,7 +9,9 @@
     </bean>
 
     <bean id="clientLocal" class="com.bsg.assignment2.client.ClientLocalCommunicationWrapperImpl">
+    </bean>
 
+    <bean id="serverLocal" class="com.bsg.assignment2.client.ServerLocalCommunicationWrapperImpl">
     </bean>
 
 </beans>

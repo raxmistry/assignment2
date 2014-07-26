@@ -1,11 +1,7 @@
 package com.bsg.assignment2.client;
 
-import com.bsg.assignment2.common.LocalCommunicationWrapper;
 import com.bsg.assignment2.common.SocketProtocol;
 
-import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -16,8 +12,6 @@ import java.util.logging.Logger;
  */
 public class ClientLocalCommunicationWrapperImpl implements LocalCommunicationWrapper {
     public static final long TIMEOUT = 10000L;
-    private PipedInputStream inputStream;
-    private PipedOutputStream outputStream;
     private ClientProtocol clientProtocol = new ClientProtocol();
     private Logger logger = Logger.getLogger(ClientLocalCommunicationWrapperImpl.class.getName());
     private String filename;
@@ -73,40 +67,6 @@ public class ClientLocalCommunicationWrapperImpl implements LocalCommunicationWr
             e.printStackTrace();
         }
     }
-
-    public void initiate() {
-
-
-        clientProtocol.setFilename("/Users/rmistry/test.data");
-        try {
-            logger.log(Level.INFO, "Starting the client Protocol");
-            clientProtocol.startProtocol(inputStream, outputStream);
-        } catch (IOException e) {
-            logger.log(Level.SEVERE, "Could not initiate client data exchange protocol");
-            e.printStackTrace();
-        } finally {
-
-            try {
-                logger.log(Level.INFO, "Client closing streams");
-                inputStream.close();
-                outputStream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    @Override
-    public void setOutputStream(PipedOutputStream outputStream) {
-        this.outputStream = outputStream;
-    }
-
-    @Override
-    public void setInputStream(PipedInputStream inputStream) {
-        this.inputStream = inputStream;
-    }
-
 
     public void setqServerToClient(BlockingQueue<String> qServerToClient) {
         this.qServerToClient = qServerToClient;

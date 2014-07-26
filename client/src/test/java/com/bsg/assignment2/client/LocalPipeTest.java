@@ -10,12 +10,6 @@ import java.util.logging.Logger;
 public class LocalPipeTest {
     private Logger logger = Logger.getLogger(LocalPipeTest.class.getName());
 
-//    @Test
-//    public void testPipe() {
-
-//        SynchronousQueue<String> qServerToClient = new SynchronousQueue<String>();
-//        SynchronousQueue<String> qClientToServer = new SynchronousQueue<String>();
-
     public static void main(String args[]) {
         BlockingQueue<String> qServerToClient = new LinkedBlockingQueue<String>();
         BlockingQueue<String> qClientToServer = new LinkedBlockingQueue<String>();
