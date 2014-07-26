@@ -15,6 +15,5 @@ public class ClientSocketCommunicationWrapperImplTest {
         clientSocketCommunicationWrapper.setFilename("/Users/rmistry/test.data");
         clientSocketCommunicationWrapper.setPort(9999);
         clientSocketCommunicationWrapper.initiateSocket();
-
     }
 }
