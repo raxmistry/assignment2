@@ -8,17 +8,20 @@ import java.util.logging.Logger;
 
 public class ServerProtocol {
     private final StreamHelper streamHelper = new StreamHelper();
-    //    private final ServerSocketCommunicationWrapperImpl serverSocketCommunicationWrapperImpl;
     Logger logger = Logger.getLogger(ServerProtocol.class.getName());
     private String filename;
     private FileReaderImpl fileReader;
 
 
-    public void serverProtocol(OutputStream outputStream, InputStream inputStream) throws IOException {
-        byte[] inputBytes;// Check for InitialReady
+    public void startProtocol(OutputStream outputStream, InputStream inputStream) throws IOException {
+        byte[] inputBytes;
+
+        // Check for InitialReady
+        logger.log(Level.INFO, "In Server:startProtocol");
         inputBytes = streamHelper.getBytes(inputStream);
         String initialReady = new String(inputBytes);
         logger.log(Level.INFO, "initialReady = " + initialReady);
+
         if (initialReady.compareTo(SocketProtocol.CLIENT_INITIAL_READY) == 0) {
             // Reply okInitial
             logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_INITIAL_READY);
@@ -29,6 +32,7 @@ public class ServerProtocol {
         inputBytes = streamHelper.getBytes(inputStream);
         String filename = new String(inputBytes);
         logger.log(Level.INFO, "Filename = " + filename);
+
         if (filename != null) {
             // Reply okFilename
             logger.log(Level.INFO, "Send " + SocketProtocol.SERVER_FILENAME_OK);
@@ -38,6 +42,7 @@ public class ServerProtocol {
         // Get ReadyForData state from client
         inputBytes = streamHelper.getBytes(inputStream);
         String clientReadyForData = new String(inputBytes);
+
         if (clientReadyForData.compareTo(SocketProtocol.CLIENT_READY_FOR_DATA) == 0) {
             logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_READY_FOR_DATA);
             // Reply with data
@@ -53,24 +58,4 @@ public class ServerProtocol {
 
         }
     }
-
-
-//    // Write to the output stream and flush
-//    private void sendToOutputStream(OutputStream outputStream, String data) throws IOException {
-//
-//        streamHelper.sendToOutputStream(outputStream, data);
-//    }
-//
-//    // Read available data from the input stream
-//    private byte[] getBytes(InputStream inputStream) throws IOException {
-//        //TODO: Get bytes working properly to make this generic
-//
-//        return streamHelper.getBytes(inputStream);
-//    }
-//
-//
-//    private void streamFile(OutputStream outputStream, String filename) throws IOException {
-//
-//        streamHelper.streamFile(outputStream, filename);
-//    }
 }

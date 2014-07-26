@@ -61,7 +61,7 @@ public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommuni
             }
 
             // Start the data exchange protocol
-            serverProtocol.serverProtocol(outputStream, inputStream);
+            serverProtocol.startProtocol(outputStream, inputStream);
 
             // Close the connection
             closeSocket();

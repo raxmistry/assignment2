@@ -1,0 +1,15 @@
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="clientSocket" class="com.bsg.assignment2.client.ClientSocketCommunicationWrapperImpl">
+        <property name="hostname" value="localhost"/>
+        <property name="filename" value="/Users/rmistry/test.data"/>
+    </bean>
+
+    <bean id="clientLocal" class="com.bsg.assignment2.client.ClientLocalCommunicationWrapperImpl">
+
+    </bean>
+
+</beans>

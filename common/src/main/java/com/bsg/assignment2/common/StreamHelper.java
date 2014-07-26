@@ -8,23 +8,39 @@ public class StreamHelper {
     private Logger logger = Logger.getLogger(StreamHelper.class.getName());
 
     public void sendToOutputStream(OutputStream outputStream, String data) throws IOException {
-        if (outputStream instanceof DataOutputStream) {
-            ((DataOutputStream) outputStream).writeUTF(data);
-        } else {
-            //Do something with the bytes
-        }
+        synchronized (outputStream) {
+            if (outputStream instanceof DataOutputStream) {
+                ((DataOutputStream) outputStream).writeUTF(data);
+            } else {
+                logger.log(Level.INFO, "PipedOutputStream");
+                outputStream.write(data.getBytes());
+            }
 
-        outputStream.flush();
+            outputStream.flush();
+        }
     }
 
     // Read available data from the input stream
     public byte[] getBytes(InputStream inputStream) throws IOException {
+
         String readUTF = null;
-        //TODO: Get bytes working properly to make this generic
-        if (inputStream instanceof DataInputStream) {
-            readUTF = ((DataInputStream) inputStream).readUTF();
-        } else {
-            // do something with bytes here
+        synchronized (inputStream) {
+            //TODO: Get bytes working properly to make this generic
+            if (inputStream instanceof DataInputStream) {
+                readUTF = ((DataInputStream) inputStream).readUTF();
+            }
+
+            if (inputStream instanceof PipedInputStream) {
+                logger.log(Level.INFO, "PipedInputStream");
+                int available = inputStream.available();
+
+                logger.log(Level.INFO, "Available: " + available);
+                byte[] bytes = new byte[available];
+
+                logger.log(Level.INFO, "Reading bytes from stream");
+                inputStream.read(bytes);
+                readUTF = new String(bytes);
+            }
         }
 
         return readUTF.getBytes();
@@ -36,12 +52,14 @@ public class StreamHelper {
         String data = fileReader.getMoreData();
         logger.log(Level.INFO, "File data: " + data);
 
-        if (outputStream instanceof DataOutputStream) {
-            ((DataOutputStream) outputStream).writeUTF(data);
-        } else {
-            // do something with bytes
-        }
+        synchronized (outputStream) {
+            if (outputStream instanceof DataOutputStream) {
+                ((DataOutputStream) outputStream).writeUTF(data);
+            } else {
+                logger.log(Level.INFO, "PipedOutputStream");
+            }
 
-        outputStream.flush();
+            outputStream.flush();
+        }
     }
 }

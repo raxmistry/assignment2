@@ -48,7 +48,7 @@ public class ClientSocketCommunicationWrapperImpl implements ClientSocketCommuni
 
                 //TODO: Get an input filename from somewhere
                 clientProtocol.setFilename("/Users/rmistry/test.data");
-                clientProtocol.clientProtocol(inputStream, outputStream);
+                clientProtocol.startProtocol(inputStream, outputStream);
 
 
             } catch (IOException e) {

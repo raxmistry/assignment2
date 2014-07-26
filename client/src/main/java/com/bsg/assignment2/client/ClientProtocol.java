@@ -26,7 +26,7 @@ public class ClientProtocol {
         this.filename = filename;
     }
 
-    void clientProtocol(InputStream inputStream, OutputStream outputStream) throws IOException {
+    void startProtocol(InputStream inputStream, OutputStream outputStream) throws IOException {
         byte[] inputBytes;
         streamHelper.sendToOutputStream(outputStream, SocketProtocol.CLIENT_INITIAL_READY);
 
