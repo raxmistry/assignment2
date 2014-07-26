@@ -11,7 +11,6 @@ public class ClientSocketCommunicationWrapperImplTest {
 
         clientSocketCommunicationWrapper.setHostname("Rakeshs-MacBook-Air.local");
         //TODO: Implement binary file handling
-        //clientSocketCommunicationWrapper.setFilename("/Users/rmistry/Desktop/BSG Docs/signed.pdf");
         clientSocketCommunicationWrapper.setFilename("/Users/rmistry/test.data");
         clientSocketCommunicationWrapper.setPort(9999);
         clientSocketCommunicationWrapper.initiateSocket();
