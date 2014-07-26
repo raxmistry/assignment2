@@ -1,7 +1,5 @@
 package com.bsg.assignment2.client;
 
-import com.bsg.assignment2.common.SocketProtocol;
-
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -14,6 +12,7 @@ import java.util.logging.Logger;
  * Created by rmistry on 2014/07/25.
  */
 public class ClientSocketCommunicationWrapperImpl implements ClientSocketCommunicationWrapper {
+    private final ClientProtocol clientProtocol = new ClientProtocol();
     Socket clientSocket;
     private Integer port;
     private String hostname;
@@ -47,29 +46,9 @@ public class ClientSocketCommunicationWrapperImpl implements ClientSocketCommuni
                 inputStream = new DataInputStream(clientSocket.getInputStream());
                 outputStream = new DataOutputStream(clientSocket.getOutputStream());
 
-                sendToOutputStream(outputStream, SocketProtocol.CLIENT_INITIAL_READY);
-
-                inputBytes = getBytes(inputStream, SocketProtocol.SERVER_INITIAL_OK.length());
-                String serverInitialOk = new String(inputBytes);
-                if (serverInitialOk.compareTo(SocketProtocol.SERVER_INITIAL_OK) == 0) {
-                    //Send the filename we want to stream back
-                    sendToOutputStream(outputStream, filename);
-                }
-
-                inputBytes = getBytes(inputStream, SocketProtocol.SERVER_FILENAME_OK.length());
-                String serverFilenameOk = new String(inputBytes);
-
-                if (serverFilenameOk.compareTo(SocketProtocol.SERVER_FILENAME_OK) == 0) {
-                    sendToOutputStream(outputStream, SocketProtocol.CLIENT_READY_FOR_DATA);
-                }
-
-                // Get the data from the filename
-                String data = inputStream.readUTF();
-                System.out.println(data);
-
-
-                // Let the server know that we're done
-                sendToOutputStream(outputStream, SocketProtocol.CLIENT_DONE);
+                //TODO: Get an input filename from somewhere
+                clientProtocol.setFilename("/Users/rmistry/test.data");
+                clientProtocol.clientProtocol(inputStream, outputStream);
 
 
             } catch (IOException e) {
@@ -102,24 +81,6 @@ public class ClientSocketCommunicationWrapperImpl implements ClientSocketCommuni
             return;
         }
 
-    }
-
-    private void sendToOutputStream(DataOutputStream outputStream, String data) throws IOException {
-        outputStream.writeUTF(data);
-        outputStream.flush();
-    }
-
-
-    // Read available data from the input stream
-    private byte[] getBytes(DataInputStream inputStream, int tagLength) throws IOException {
-//        while (inputStream.available()==0){
-//            logger.log(Level.FINEST, "Waiting for data to be available");
-//        }
-
-        String readUTF = inputStream.readUTF();
-        logger.log(Level.INFO, "UTF " + readUTF);
-
-        return readUTF.getBytes();
     }
 
     @Override

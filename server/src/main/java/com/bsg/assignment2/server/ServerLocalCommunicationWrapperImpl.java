@@ -3,7 +3,9 @@ package com.bsg.assignment2.server;
 import com.bsg.assignment2.common.FileReader;
 import com.bsg.assignment2.common.FileReaderImpl;
 import com.bsg.assignment2.common.LocalCommunicationWrapper;
+import com.bsg.assignment2.common.ServerProtocol;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.logging.Logger;
@@ -13,9 +15,9 @@ import java.util.logging.Logger;
  */
 public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWrapper, Runnable {
 
+    ServerProtocol serverProtocol = new ServerProtocol();
     private FileReader fileReader;
     private Logger logger = Logger.getLogger(ServerLocalCommunicationWrapperImpl.class.getName());
-
     private OutputStream outputStream;
     private InputStream inputStream;
 
@@ -26,6 +28,12 @@ public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWr
 
 
         String data = "SomeTestData";
+
+        try {
+            serverProtocol.serverProtocol(outputStream, inputStream);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
