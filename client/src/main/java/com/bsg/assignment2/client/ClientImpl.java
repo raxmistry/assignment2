@@ -4,6 +4,9 @@ import com.bsg.assignment2.common.CommunicationWrapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.ConnectException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
@@ -28,6 +31,23 @@ public class ClientImpl implements Client {
             System.exit(0);
         }
 
+        // Get the user to enter the filename to read
+        System.out.println("Please enter a fully qualified filename to fetch: ");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String filename = null;
+        try {
+            filename = br.readLine();
+        } catch (IOException e) {
+            logger.log(Level.WARNING, "Unable to read input from console");
+            e.printStackTrace();
+        }
+
+        if (filename == null) {
+            logger.log(Level.SEVERE, "A filename must be specified");
+            System.exit(0);
+        }
+
+
         String parm = args[0];
         String clientBeanId = null;
 
@@ -43,6 +63,7 @@ public class ClientImpl implements Client {
 
             clientBeanId = "clientLocal";
             LocalCommunicationWrapper clientLocal = (ClientLocalCommunicationWrapperImpl) context.getBean(clientBeanId);
+            clientLocal.setFilename(filename);
 
             clientLocal.setqClientToServer(qClientToServer);
             clientLocal.setqServerToClient(qServerToClient);
@@ -74,6 +95,7 @@ public class ClientImpl implements Client {
                 // Initiate the Client connection.
                 clientSocket.setHostname(hostname);
                 clientSocket.setPort(new Integer(port));
+                clientSocket.setFilename(filename);
                 try {
                     clientSocket.initiateSocket();
                 } catch (ConnectException exception) {
