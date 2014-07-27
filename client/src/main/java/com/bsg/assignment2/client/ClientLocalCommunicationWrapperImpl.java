@@ -1,5 +1,6 @@
 package com.bsg.assignment2.client;
 
+import com.bsg.assignment2.common.BlockingQueueHelper;
 import com.bsg.assignment2.common.SocketProtocol;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -32,51 +33,32 @@ public class ClientLocalCommunicationWrapperImpl implements LocalCommunicationWr
     public void initiateQueueDataExchange(BlockingQueue<String> qServerToClient, BlockingQueue<String> qClientToServer) {
 
 
-        offerToQueue(qClientToServer, SocketProtocol.CLIENT_INITIAL_READY, TIMEOUT, TimeUnit.MILLISECONDS);
+        BlockingQueueHelper.offerToQueue(qClientToServer, SocketProtocol.CLIENT_INITIAL_READY, TIMEOUT, TimeUnit.MILLISECONDS);
 
 
         String head = null;
-        head = pollQueue(qServerToClient, TIMEOUT, TimeUnit.MILLISECONDS);
+        head = BlockingQueueHelper.pollQueue(qServerToClient, TIMEOUT, TimeUnit.MILLISECONDS);
         logger.log(Level.INFO, head);
 
 
         if (head.compareTo(SocketProtocol.SERVER_INITIAL_OK) == 0) {
-            offerToQueue(qClientToServer, filename, TIMEOUT, TimeUnit.MILLISECONDS);
+            BlockingQueueHelper.offerToQueue(qClientToServer, filename, TIMEOUT, TimeUnit.MILLISECONDS);
         }
 
-        head = pollQueue(qServerToClient, TIMEOUT, TimeUnit.MILLISECONDS);
+        head = BlockingQueueHelper.pollQueue(qServerToClient, TIMEOUT, TimeUnit.MILLISECONDS);
         logger.log(Level.INFO, head);
         if (head.compareTo(SocketProtocol.SERVER_FILENAME_OK) == 0) {
-            offerToQueue(qClientToServer, SocketProtocol.CLIENT_READY_FOR_DATA, TIMEOUT, TimeUnit.MILLISECONDS);
+            BlockingQueueHelper.offerToQueue(qClientToServer, SocketProtocol.CLIENT_READY_FOR_DATA, TIMEOUT, TimeUnit.MILLISECONDS);
         }
 
-        head = pollQueue(qServerToClient, TIMEOUT, TimeUnit.MILLISECONDS);
+        head = BlockingQueueHelper.pollQueue(qServerToClient, TIMEOUT, TimeUnit.MILLISECONDS);
 
         outputWriter.writeData(head);
 
-        offerToQueue(qClientToServer, SocketProtocol.CLIENT_DONE, TIMEOUT, TimeUnit.MILLISECONDS);
+        BlockingQueueHelper.offerToQueue(qClientToServer, SocketProtocol.CLIENT_DONE, TIMEOUT, TimeUnit.MILLISECONDS);
     }
 
-    private String pollQueue(BlockingQueue<String> queueName, Long timeout, TimeUnit timeUnit) {
-        String data = null;
-        try {
-            data = queueName.poll(timeout, timeUnit);
-        } catch (InterruptedException e) {
-            logger.log(Level.SEVERE, "Error polling queue");
-            e.printStackTrace();
-        }
 
-        return data;
-    }
-
-    private void offerToQueue(BlockingQueue<String> queue, String data, Long timeout, TimeUnit timeUnit) {
-        try {
-            queue.put(data);
-        } catch (InterruptedException e) {
-            logger.log(Level.SEVERE, "Error publishing to queue: ");
-            e.printStackTrace();
-        }
-    }
 
     public void setqServerToClient(BlockingQueue<String> qServerToClient) {
         this.qServerToClient = qServerToClient;

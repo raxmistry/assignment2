@@ -36,22 +36,22 @@ public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWr
 
 
         String head = null;
-        head = pollQueue(qClientToServer, TIMEOUT, TimeUnit.MILLISECONDS);
+        head = BlockingQueueHelper.pollQueue(qClientToServer, TIMEOUT, TimeUnit.MILLISECONDS);
 
         logger.log(Level.INFO, head);
 
         if (head.compareTo(SocketProtocol.CLIENT_INITIAL_READY) == 0) {
             logger.log(Level.INFO, "Putting Server initial ok");
-            offerToQueue(qServerToClient, SocketProtocol.SERVER_INITIAL_OK, TIMEOUT, TimeUnit.MILLISECONDS);
+            BlockingQueueHelper.offerToQueue(qServerToClient, SocketProtocol.SERVER_INITIAL_OK, TIMEOUT, TimeUnit.MILLISECONDS);
         }
 
-        head = pollQueue(qClientToServer, TIMEOUT, TimeUnit.MILLISECONDS);
+        head = BlockingQueueHelper.pollQueue(qClientToServer, TIMEOUT, TimeUnit.MILLISECONDS);
         filename = head;
         logger.log(Level.INFO, head);
 
-        offerToQueue(qServerToClient, SocketProtocol.SERVER_FILENAME_OK, TIMEOUT, TimeUnit.MILLISECONDS);
+        BlockingQueueHelper.offerToQueue(qServerToClient, SocketProtocol.SERVER_FILENAME_OK, TIMEOUT, TimeUnit.MILLISECONDS);
 
-        head = pollQueue(qClientToServer, TIMEOUT, TimeUnit.MILLISECONDS);
+        head = BlockingQueueHelper.pollQueue(qClientToServer, TIMEOUT, TimeUnit.MILLISECONDS);
         logger.log(Level.INFO, head);
         if (head.compareTo(SocketProtocol.CLIENT_READY_FOR_DATA) == 0) {
             StreamHelper streamHelper = new StreamHelper();
@@ -59,14 +59,14 @@ public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWr
             fileReader.readyFile(filename);
             try {
                 String data = fileReader.getMoreData();
-                offerToQueue(qServerToClient, data, TIMEOUT, TimeUnit.MILLISECONDS);
+                BlockingQueueHelper.offerToQueue(qServerToClient, data, TIMEOUT, TimeUnit.MILLISECONDS);
             } catch (IOException e) {
                 logger.log(Level.SEVERE, "Could not read data from file: " + filename);
                 e.printStackTrace();
             }
         }
 
-        head = pollQueue(qClientToServer, TIMEOUT, TimeUnit.MILLISECONDS);
+        head = BlockingQueueHelper.pollQueue(qClientToServer, TIMEOUT, TimeUnit.MILLISECONDS);
         logger.log(Level.INFO, head);
         if (head.compareTo(SocketProtocol.CLIENT_DONE) == 0) {
             // Disconnect?
@@ -128,37 +128,5 @@ public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWr
         this.filename = filename;
     }
 
-    /**
-     * Get data from a specific queues, waiting for the supplied period before timing out.
-     * @param queueName
-     * @param timeout
-     * @param timeUnit
-     * @return
-     */
-    private String pollQueue(BlockingQueue<String> queueName, Long timeout, TimeUnit timeUnit) {
-        String data = null;
-        try {
-            data = queueName.poll(timeout, timeUnit);
-        } catch (InterruptedException e) {
-            logger.log(Level.SEVERE, "Error polling queue");
-            e.printStackTrace();
-        }
-        return data;
-    }
 
-    /**
-     * Put data on a specific queue. Timeout and Timeunit are not used.
-     * @param queue
-     * @param data
-     * @param timeout - not used
-     * @param timeUnit - not used
-     */
-    private void offerToQueue(BlockingQueue<String> queue, String data, Long timeout, TimeUnit timeUnit) {
-        try {
-            queue.put(data);
-        } catch (InterruptedException e) {
-            logger.log(Level.SEVERE, "Error publishing to queue: ");
-            e.printStackTrace();
-        }
-    }
 }
