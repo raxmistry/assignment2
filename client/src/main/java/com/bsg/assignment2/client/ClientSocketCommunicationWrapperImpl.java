@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 public class ClientSocketCommunicationWrapperImpl implements ClientSocketCommunicationWrapper {
 
     private static final Logger logger = Logger.getLogger(ClientSocketCommunicationWrapperImpl.class.getName());
-    private final ClientProtocolImpl clientProtocol = new ClientProtocolImpl();
+    private final ClientSocketProtocolImpl clientProtocol = new ClientSocketProtocolImpl();
     Socket clientSocket;
     private Integer port;
     private String hostname;

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  */
 public class ClientLocalCommunicationWrapperImpl implements LocalCommunicationWrapper, ClientProtocol {
     public static final long TIMEOUT = 10000L;
-    private ClientProtocolImpl clientProtocol = new ClientProtocolImpl();
+    private ClientSocketProtocolImpl clientProtocol = new ClientSocketProtocolImpl();
     private Logger logger = Logger.getLogger(ClientLocalCommunicationWrapperImpl.class.getName());
     private String filename;
 
@@ -57,7 +57,6 @@ public class ClientLocalCommunicationWrapperImpl implements LocalCommunicationWr
 
         BlockingQueueHelper.offerToQueue(qClientToServer, SocketProtocol.CLIENT_DONE, TIMEOUT, TimeUnit.MILLISECONDS);
     }
-
 
 
     public void setqServerToClient(BlockingQueue<String> qServerToClient) {

@@ -3,6 +3,7 @@ package com.bsg.assignment2.server;
 import com.bsg.assignment2.common.FileReader;
 import com.bsg.assignment2.common.ServerProtocol;
 import com.bsg.assignment2.common.ServerSocketCommunicationWrapper;
+import com.bsg.assignment2.common.UnexpectedProtocolException;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -70,7 +71,13 @@ public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommuni
                     logger.log(Level.INFO, "Client is connected");
                 }
                 // Start the data exchange protocol
-                serverProtocol.startProtocol(outputStream, inputStream);
+                try {
+                    serverProtocol.startProtocol(outputStream, inputStream);
+                } catch (UnexpectedProtocolException e) {
+                    logger.log(Level.WARNING, "The client did not send data as per the expected protocol. Closing the connection");
+                    e.printStackTrace();
+                    client.close();
+                }
             }
 
             // Close the connection
