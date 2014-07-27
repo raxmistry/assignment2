@@ -1,7 +1,6 @@
 package com.bsg.assignment2.client;
 
 import com.bsg.assignment2.common.SocketProtocol;
-import org.junit.Test;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -19,12 +18,12 @@ import java.util.logging.Logger;
 public class ClientTest {
 
     public static final int BUFFER_LENGTH = 23;
-    Logger logger = Logger.getLogger(ClientTest.class.getName());
 
-    @Test
-    public void testClientConnects() {
+
+    public static void main(String args[]) {
+        Logger logger = Logger.getLogger(ClientTest.class.getName());
         Socket socket = new Socket();
-        SocketAddress socketAddress = new InetSocketAddress("Rakeshs-MacBook-Air.local", 9999);
+        SocketAddress socketAddress = new InetSocketAddress("localhost", 9999);
         try {
             socket.connect(socketAddress);
 

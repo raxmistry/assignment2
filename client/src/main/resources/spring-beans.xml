@@ -14,7 +14,7 @@
     </bean>
 
     <bean id="clientLocal" class="com.bsg.assignment2.client.ClientLocalCommunicationWrapperImpl">
-        <property name="filename" value="/Users/rmistry/test.data"/>
+        <property name="filename" value="./test.data"/>
     </bean>
 
     <bean id="serverLocal" class="com.bsg.assignment2.client.ServerLocalCommunicationWrapperImpl">

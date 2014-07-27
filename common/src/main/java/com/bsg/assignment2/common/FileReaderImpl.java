@@ -29,7 +29,6 @@ public class FileReaderImpl implements FileReader {
         for (String line : stringList) {
             sb.append(line);
         }
-        //return String.valueOf(stringList);
         return sb.toString();
     }
 }

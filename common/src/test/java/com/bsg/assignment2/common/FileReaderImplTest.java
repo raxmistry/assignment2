@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class FileReaderImplTest {
 
-    public static final int FILE_LENGTH = 23;
+    public static final int FILE_LENGTH = 4209;
     public static final String FILENAME = "/Users/rmistry/test.data";
 
     @Test

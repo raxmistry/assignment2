@@ -1,17 +1,14 @@
 package com.bsg.assignment2.server;
 
 import com.bsg.assignment2.common.SocketCommunicationWrapper;
-import org.junit.After;
-import org.junit.Test;
 
 import java.net.ConnectException;
 
 public class ServerSocketCommunicationWrapperImplTest {
 
-    SocketCommunicationWrapper socketCommunicationWrapper;
 
-    @Test
-    public void testSocketListener() {
+    public static void main(String args[]) {
+        SocketCommunicationWrapper socketCommunicationWrapper;
         socketCommunicationWrapper = new ServerSocketCommunicationWrapperImpl();
         socketCommunicationWrapper.setPort(9999);
 
@@ -23,9 +20,7 @@ public class ServerSocketCommunicationWrapperImplTest {
         }
     }
 
-    @After
-    public void tearDown() {
-        socketCommunicationWrapper.closeSocket();
+    public void testSocketListener() {
     }
 
 }
