@@ -1,6 +1,7 @@
 package com.bsg.assignment2.client;
 
 import com.bsg.assignment2.common.SocketProtocol;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -10,14 +11,15 @@ import java.util.logging.Logger;
 /**
  * Created by rmistry on 2014/07/26.
  */
-public class ClientLocalCommunicationWrapperImpl implements LocalCommunicationWrapper {
+public class ClientLocalCommunicationWrapperImpl implements LocalCommunicationWrapper, ClientProtocol {
     public static final long TIMEOUT = 10000L;
-    private ClientProtocol clientProtocol = new ClientProtocol();
+    private ClientProtocolImpl clientProtocol = new ClientProtocolImpl();
     private Logger logger = Logger.getLogger(ClientLocalCommunicationWrapperImpl.class.getName());
     private String filename;
 
     private BlockingQueue<String> qServerToClient;
     private BlockingQueue<String> qClientToServer;
+    private OutputWriter outputWriter;
 
     public void queues(BlockingQueue<String> qServerToClient, BlockingQueue<String> qClientToServer) {
 
@@ -42,7 +44,8 @@ public class ClientLocalCommunicationWrapperImpl implements LocalCommunicationWr
 
         head = pollQueue(qServerToClient, TIMEOUT, TimeUnit.MILLISECONDS);
 
-        System.out.println(head);
+        //System.out.println(head);
+        outputWriter.writeData(head);
 
         offerToQueue(qClientToServer, SocketProtocol.CLIENT_DONE, TIMEOUT, TimeUnit.MILLISECONDS);
     }
@@ -84,5 +87,11 @@ public class ClientLocalCommunicationWrapperImpl implements LocalCommunicationWr
     @Override
     public void run() {
         queues(qServerToClient, qClientToServer);
+    }
+
+    @Override
+    @Autowired
+    public void setOutputWriter(OutputWriter outputWriter) {
+        this.outputWriter = outputWriter;
     }
 }

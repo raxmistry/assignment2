@@ -1,7 +1,12 @@
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <context:component-scan base-package="com.bsg.assignment2.client"/>
 
     <bean id="clientSocket" class="com.bsg.assignment2.client.ClientSocketCommunicationWrapperImpl">
         <property name="hostname" value="localhost"/>
@@ -15,4 +20,5 @@
     <bean id="serverLocal" class="com.bsg.assignment2.client.ServerLocalCommunicationWrapperImpl">
     </bean>
 
+    <bean id="outputWriter" class="com.bsg.assignment2.client.ConsoleOutputWriterImpl"/>
 </beans>

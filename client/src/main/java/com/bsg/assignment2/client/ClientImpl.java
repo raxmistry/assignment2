@@ -24,7 +24,6 @@ public class ClientImpl implements Client {
             System.exit(0);
         }
 
-
         String parm = args[0];
         String clientBeanId = null;
         ApplicationContext context = new ClassPathXmlApplicationContext(
@@ -71,11 +70,5 @@ public class ClientImpl implements Client {
                 clientSocket.initiateSocket();
             }
         }
-    }
-
-
-    @Override
-    public void start() {
-
     }
 }

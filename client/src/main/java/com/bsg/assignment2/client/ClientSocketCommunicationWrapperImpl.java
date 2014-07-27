@@ -12,7 +12,7 @@ import java.util.logging.Logger;
  * Created by rmistry on 2014/07/25.
  */
 public class ClientSocketCommunicationWrapperImpl implements ClientSocketCommunicationWrapper {
-    private final ClientProtocol clientProtocol = new ClientProtocol();
+    private final ClientProtocolImpl clientProtocol = new ClientProtocolImpl();
     Socket clientSocket;
     private Integer port;
     private String hostname;
