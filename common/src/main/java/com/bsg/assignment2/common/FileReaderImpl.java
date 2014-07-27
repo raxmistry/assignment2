@@ -1,5 +1,7 @@
 package com.bsg.assignment2.common;
 
+import org.springframework.stereotype.Component;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,6 +11,7 @@ import java.util.List;
 /**
  * Created by rmistry on 2014/07/25.
  */
+@Component
 public class FileReaderImpl implements FileReader {
     private Path path;
 
@@ -19,10 +22,14 @@ public class FileReaderImpl implements FileReader {
         }
     }
 
-    //TODO: Change this os I can stream a binary file
     @Override
     public String getMoreData() throws IOException {
         List<String> stringList = Files.readAllLines(path);
-        return String.valueOf(stringList);
+        StringBuilder sb = new StringBuilder();
+        for (String line : stringList) {
+            sb.append(line);
+        }
+        //return String.valueOf(stringList);
+        return sb.toString();
     }
 }

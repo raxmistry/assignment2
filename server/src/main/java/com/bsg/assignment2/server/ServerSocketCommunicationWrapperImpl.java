@@ -4,6 +4,8 @@ import com.bsg.assignment2.common.FileReader;
 import com.bsg.assignment2.common.ServerProtocol;
 import com.bsg.assignment2.common.ServerSocketCommunicationWrapper;
 import com.bsg.assignment2.common.UnexpectedProtocolException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -18,6 +20,7 @@ import java.util.logging.Logger;
  * Server socket communication wrapper initiates the socket listener for the server.
  * Created by rmistry on 2014/07/25.
  */
+@Component
 public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommunicationWrapper {
 
     private final ServerProtocol serverProtocol = new ServerProtocol();
@@ -122,7 +125,8 @@ public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommuni
     }
 
     @Override
+    @Autowired
     public void setFileReader(FileReader fileReader) {
-        this.setFileReader(fileReader);
+        this.fileReader = fileReader;
     }
 }
