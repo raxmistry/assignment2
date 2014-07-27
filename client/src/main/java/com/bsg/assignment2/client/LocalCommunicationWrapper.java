@@ -14,4 +14,6 @@ public interface LocalCommunicationWrapper extends CommunicationWrapper, Runnabl
     public void setqClientToServer(BlockingQueue<String> qClientToServer);
 
     public void setFilename(String filename);
+
+    public void initiateQueueDataExchange(BlockingQueue<String> qServerToClient, BlockingQueue<String> qClientToServer);
 }

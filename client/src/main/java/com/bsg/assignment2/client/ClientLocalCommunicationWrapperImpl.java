@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Local Communication Wrapper for the client.
  * Created by rmistry on 2014/07/26.
  */
 public class ClientLocalCommunicationWrapperImpl implements LocalCommunicationWrapper, ClientProtocol {
@@ -21,7 +22,14 @@ public class ClientLocalCommunicationWrapperImpl implements LocalCommunicationWr
     private BlockingQueue<String> qClientToServer;
     private OutputWriter outputWriter;
 
-    public void queues(BlockingQueue<String> qServerToClient, BlockingQueue<String> qClientToServer) {
+    /**
+     * Start data exchange between the client and server using queues.
+     *
+     * @param qServerToClient
+     * @param qClientToServer
+     */
+    @Override
+    public void initiateQueueDataExchange(BlockingQueue<String> qServerToClient, BlockingQueue<String> qClientToServer) {
 
 
         offerToQueue(qClientToServer, SocketProtocol.CLIENT_INITIAL_READY, TIMEOUT, TimeUnit.MILLISECONDS);
@@ -44,7 +52,6 @@ public class ClientLocalCommunicationWrapperImpl implements LocalCommunicationWr
 
         head = pollQueue(qServerToClient, TIMEOUT, TimeUnit.MILLISECONDS);
 
-        //System.out.println(head);
         outputWriter.writeData(head);
 
         offerToQueue(qClientToServer, SocketProtocol.CLIENT_DONE, TIMEOUT, TimeUnit.MILLISECONDS);
@@ -86,7 +93,7 @@ public class ClientLocalCommunicationWrapperImpl implements LocalCommunicationWr
 
     @Override
     public void run() {
-        queues(qServerToClient, qClientToServer);
+        initiateQueueDataExchange(qServerToClient, qClientToServer);
     }
 
     @Override

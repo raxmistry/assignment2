@@ -7,12 +7,14 @@ import com.bsg.assignment2.common.ServerSocketCommunicationWrapper;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Server socket communication wrapper initiates the socket listener for the server.
  * Created by rmistry on 2014/07/25.
  */
 public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommunicationWrapper {
@@ -22,7 +24,8 @@ public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommuni
 
     private Integer port;
     private ServerSocket serverSocket;
-    private Integer timeout = 1000000;
+    //Default timeout if we don't receive a connection
+    private Integer timeout = 100000;
     private FileReader fileReader;
 
     @Override
@@ -39,33 +42,42 @@ public class ServerSocketCommunicationWrapperImpl implements ServerSocketCommuni
     }
 
     @Override
-    public void initiateSocket() {
+    public void initiateSocket() throws ConnectException {
         Socket client;
         DataOutputStream outputStream = null;
         DataInputStream inputStream = null;
         byte[] inputBytes;
 
         try {
+            // Create the socket
             serverSocket = new ServerSocket(port);
 
             logger.log(Level.INFO, "Server socket address: " + serverSocket.getInetAddress());
             serverSocket.setSoTimeout(getTimeout());
-            client = serverSocket.accept();
-
-            outputStream = new DataOutputStream(client.getOutputStream());
-            inputStream = new DataInputStream(client.getInputStream());
 
 
-            if (client.isConnected()) {
-                logger.log(Level.INFO, "Client is connected");
+            boolean state = true;
+            // The server will run indefinitely until explicitly killed.
+            while (state) {
+                //Wait for client connections for the defined timeout period.
+                client = serverSocket.accept();
+
+                // Get the streams from the client connection
+                outputStream = new DataOutputStream(client.getOutputStream());
+                inputStream = new DataInputStream(client.getInputStream());
+
+                if (client.isConnected()) {
+                    logger.log(Level.INFO, "Client is connected");
+                }
+                // Start the data exchange protocol
+                serverProtocol.startProtocol(outputStream, inputStream);
             }
-
-            // Start the data exchange protocol
-            serverProtocol.startProtocol(outputStream, inputStream);
 
             // Close the connection
             closeSocket();
 
+        } catch (ConnectException e) {
+            throw e;
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Could not open a serverSocket on port: " + port);
             e.printStackTrace();

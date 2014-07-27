@@ -6,6 +6,12 @@ import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * A class that handles the server side of the data exchange protocol.
+ * Only used for socket connections.
+ *
+ * @author rmistry
+ */
 public class ServerProtocol {
     private final StreamHelper streamHelper = new StreamHelper();
     Logger logger = Logger.getLogger(ServerProtocol.class.getName());
@@ -13,7 +19,14 @@ public class ServerProtocol {
     private FileReaderImpl fileReader;
 
 
-    public void startProtocol(OutputStream outputStream, InputStream inputStream) throws IOException {
+    /**
+     * Start the protocol accepting input and output from the client streams
+     *
+     * @param outputStream
+     * @param inputStream
+     * @throws IOException
+     */
+    public void startProtocol(OutputStream outputStream, InputStream inputStream) throws IOException, UnexpectedProtocolException {
         byte[] inputBytes;
 
         // Check for InitialReady
@@ -26,7 +39,9 @@ public class ServerProtocol {
             // Reply okInitial
             logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_INITIAL_READY);
             streamHelper.sendToOutputStream(outputStream, SocketProtocol.SERVER_INITIAL_OK);
-        }
+        } else {
+            throw new UnexpectedProtocolException("Expected " + SocketProtocol.CLIENT_INITIAL_READY + " but received: "
+                    + initialReady);}
 
         // Check for Filename
         inputBytes = streamHelper.getBytes(inputStream);
@@ -47,7 +62,9 @@ public class ServerProtocol {
             logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_READY_FOR_DATA);
             // Reply with data
             streamHelper.streamFile(outputStream, filename);
-        }
+        } else {
+            throw new UnexpectedProtocolException("Expected " + SocketProtocol.CLIENT_READY_FOR_DATA + " but received: "
+                    + clientReadyForData);}
 
 
         // Get done state from client
@@ -55,7 +72,8 @@ public class ServerProtocol {
         String clientDone = new String(inputBytes);
         if (clientDone.compareTo(SocketProtocol.CLIENT_DONE) == 0) {
             logger.log(Level.INFO, "Received " + SocketProtocol.CLIENT_DONE);
-
-        }
+        } else {
+            throw new UnexpectedProtocolException("Expected " + SocketProtocol.CLIENT_DONE + " but received: "
+                    + clientDone);}
     }
 }

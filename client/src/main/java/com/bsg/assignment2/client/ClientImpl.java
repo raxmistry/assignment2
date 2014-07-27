@@ -4,11 +4,14 @@ import com.bsg.assignment2.common.CommunicationWrapper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.net.ConnectException;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Main Client executable for starting the client. Single command-line parameter is allowed, indicating
+ * the remote host and port or "local" for a local server connection. Client runs as a SpringApplication.
  * Created by rmistry on 2014/07/25.
  */
 public class ClientImpl implements Client {
@@ -17,6 +20,7 @@ public class ClientImpl implements Client {
 
     public static void main(String args[]) {
 
+        //Check if the args provided are correct
         if (args.length < 1 || args.length > 1) {
             System.out.println("Invalid usage. Please send exactly one command-line parameter");
             System.out.println("Usage: java -jar ClientImpl <server>");
@@ -26,11 +30,13 @@ public class ClientImpl implements Client {
 
         String parm = args[0];
         String clientBeanId = null;
+
         ApplicationContext context = new ClassPathXmlApplicationContext(
                 "spring-beans.xml");
 
         if (parm.compareToIgnoreCase("local") == 0) {
 
+            // If a local connection, load up the initiateQueueDataExchange for communication as well as the beans
 
             LinkedBlockingQueue<String> qServerToClient = new LinkedBlockingQueue<String>();
             LinkedBlockingQueue<String> qClientToServer = new LinkedBlockingQueue<String>();
@@ -41,33 +47,40 @@ public class ClientImpl implements Client {
             clientLocal.setqClientToServer(qClientToServer);
             clientLocal.setqServerToClient(qServerToClient);
 
-            //clientLocal.setFilename("/Users/rmistry/test.data");
-
             String serverLocalBeanId = "serverLocal";
             LocalCommunicationWrapper serverLocal = (ServerLocalCommunicationWrapperImpl) context.getBean(serverLocalBeanId);
 
             serverLocal.setqClientToServer(qClientToServer);
             serverLocal.setqServerToClient(qServerToClient);
 
+            //Star the client and server as separate threads
             new Thread(clientLocal).start();
             new Thread(serverLocal).start();
         } else {
+            // If not a local connection, assume its socket based
             clientBeanId = "clientSocket";
             ClientSocketCommunicationWrapper clientSocket = (ClientSocketCommunicationWrapperImpl) context.getBean(clientBeanId);
 
+            // The hostname and port must be supplied in the format hostname:port
             String[] endPoint = parm.split(":");
             if (endPoint.length != 2) {
                 logger.log(Level.SEVERE, "Invalid hostname and port supplied: " + parm);
+                logger.log(Level.SEVERE, "parameter must take the form 'hostname:port''");
                 System.exit(0);
             } else {
                 String hostname = endPoint[0];
                 String port = endPoint[1];
 
+                // Initiate the Client connection.
                 clientSocket.setHostname(hostname);
                 clientSocket.setPort(new Integer(port));
-
-                //clientSocket.setFilename("/Users/rmistry/test.data");
-                clientSocket.initiateSocket();
+                try {
+                    clientSocket.initiateSocket();
+                } catch (ConnectException exception) {
+                    logger.log(Level.SEVERE, "There was an error connecting to the remote server. Please ensure the server is " +
+                            "up and running. Also check that the hostname and port are correct");
+                    exception.printStackTrace();
+                }
             }
         }
     }

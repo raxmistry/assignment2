@@ -4,6 +4,8 @@ import com.bsg.assignment2.common.SocketCommunicationWrapper;
 import org.junit.After;
 import org.junit.Test;
 
+import java.net.ConnectException;
+
 public class ServerSocketCommunicationWrapperImplTest {
 
     SocketCommunicationWrapper socketCommunicationWrapper;
@@ -12,9 +14,13 @@ public class ServerSocketCommunicationWrapperImplTest {
     public void testSocketListener() {
         socketCommunicationWrapper = new ServerSocketCommunicationWrapperImpl();
         socketCommunicationWrapper.setPort(9999);
-        socketCommunicationWrapper.initiateSocket();
 
-        //TODO: How to test this properly
+
+        try {
+            socketCommunicationWrapper.initiateSocket();
+        } catch (ConnectException e) {
+            e.printStackTrace();
+        }
     }
 
     @After

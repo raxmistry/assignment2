@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Local Communication Wrapper for the Server implementation.
  * Created by rmistry on 2014/07/26.
  */
 public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWrapper {
@@ -24,7 +25,14 @@ public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWr
     private BlockingQueue<String> qClientToServer;
     private String filename;
 
-    public void queues(BlockingQueue<String> qServerToClient, BlockingQueue<String> qClientToServer) {
+    /**
+     * Start the data exchange protocol between the client and server
+     *
+     * @param qServerToClient
+     * @param qClientToServer
+     */
+    @Override
+    public void initiateQueueDataExchange(BlockingQueue<String> qServerToClient, BlockingQueue<String> qClientToServer) {
 
 
         String head = null;
@@ -51,7 +59,6 @@ public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWr
             fileReader.readyFile(filename);
             try {
                 String data = fileReader.getMoreData();
-                //TODO: How does this work for large data?
                 offerToQueue(qServerToClient, data, TIMEOUT, TimeUnit.MILLISECONDS);
             } catch (IOException e) {
                 logger.log(Level.SEVERE, "Could not read data from file: " + filename);
@@ -68,10 +75,19 @@ public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWr
 
     }
 
-    public void initiate() {
+    /**
+     * The local connection was meant to use PipeStreams instead of initiateQueueDataExchange. As I had issues, I resorted to Queues.
+     * Unfortunately, this means that the protocol handshake is written twice.
+     */
+    private void initiate() {
         try {
             logger.log(Level.INFO, "Starting the server Protocol");
             serverProtocol.startProtocol(outputStream, inputStream);
+
+        } catch (UnexpectedProtocolException e) {
+            logger.log(Level.SEVERE, "Server received an incorrect protocol from the client.");
+            e.printStackTrace();
+
         } catch (IOException e) {
             logger.log(Level.SEVERE, "Error trying to start the server protocol");
             e.printStackTrace();
@@ -89,14 +105,20 @@ public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWr
 
     }
 
+    /**
+     * Thread starter
+     */
+    @Override
     public void run() {
-        queues(qServerToClient, qClientToServer);
+        initiateQueueDataExchange(qServerToClient, qClientToServer);
     }
 
+    @Override
     public void setqServerToClient(BlockingQueue<String> qServerToClient) {
         this.qServerToClient = qServerToClient;
     }
 
+    @Override
     public void setqClientToServer(BlockingQueue<String> qClientToServer) {
         this.qClientToServer = qClientToServer;
     }
@@ -106,6 +128,13 @@ public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWr
         this.filename = filename;
     }
 
+    /**
+     * Get data from a specific queues, waiting for the supplied period before timing out.
+     * @param queueName
+     * @param timeout
+     * @param timeUnit
+     * @return
+     */
     private String pollQueue(BlockingQueue<String> queueName, Long timeout, TimeUnit timeUnit) {
         String data = null;
         try {
@@ -117,9 +146,15 @@ public class ServerLocalCommunicationWrapperImpl implements LocalCommunicationWr
         return data;
     }
 
+    /**
+     * Put data on a specific queue. Timeout and Timeunit are not used.
+     * @param queue
+     * @param data
+     * @param timeout - not used
+     * @param timeUnit - not used
+     */
     private void offerToQueue(BlockingQueue<String> queue, String data, Long timeout, TimeUnit timeUnit) {
         try {
-            //queue.put(data, timeout, timeUnit);
             queue.put(data);
         } catch (InterruptedException e) {
             logger.log(Level.SEVERE, "Error publishing to queue: ");

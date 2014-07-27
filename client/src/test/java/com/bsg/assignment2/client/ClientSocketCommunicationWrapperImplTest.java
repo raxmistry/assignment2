@@ -2,6 +2,8 @@ package com.bsg.assignment2.client;
 
 import org.junit.Test;
 
+import java.net.ConnectException;
+
 public class ClientSocketCommunicationWrapperImplTest {
 
     @Test
@@ -13,6 +15,12 @@ public class ClientSocketCommunicationWrapperImplTest {
         //TODO: Implement binary file handling
         clientSocketCommunicationWrapper.setFilename("/Users/rmistry/test.data");
         clientSocketCommunicationWrapper.setPort(9999);
-        clientSocketCommunicationWrapper.initiateSocket();
+        clientSocketCommunicationWrapper.setOutputWriter(new ConsoleOutputWriterImpl());
+
+        try {
+            clientSocketCommunicationWrapper.initiateSocket();
+        } catch (ConnectException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -21,7 +21,6 @@ public class StreamHelper {
 
         String readUTF = null;
         synchronized (inputStream) {
-            //TODO: Get bytes working properly to make this generic
             if (inputStream instanceof DataInputStream) {
                 readUTF = ((DataInputStream) inputStream).readUTF();
             }
