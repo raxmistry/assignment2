@@ -9,8 +9,6 @@
     <context:component-scan base-package="com.bsg.assignment2.client"/>
 
     <bean id="clientSocket" class="com.bsg.assignment2.client.ClientSocketCommunicationWrapperImpl">
-        <property name="hostname" value="localhost"/>
-        <property name="filename" value="/Users/rmistry/test.data"/>
     </bean>
 
     <bean id="clientLocal" class="com.bsg.assignment2.client.ClientLocalCommunicationWrapperImpl">
